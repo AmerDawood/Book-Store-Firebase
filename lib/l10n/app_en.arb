@@ -1,0 +1,65 @@
+{
+  "app_name": "Welcome App",
+  "login": "Sign In",
+  "register": "Sign Up",
+  "email": "Email address",
+  "password": "password",
+  "f_name": "Full Name",
+  "confirm_password": "Confirm Password",
+  "no_account": "Don'\t have an account ?",
+  "or": "or",
+  "google": "Google",
+  "facebook": "Facebook",
+
+
+  "search": "Search",
+
+
+  "popular": "Popular Books",
+
+  "seeAll": "See all",
+  "best_sellers": "Best sellers 2022",
+
+
+
+
+
+
+
+  "bn_book": "Books",
+  "bn_card": "Cart",
+  "bn_page": "My Page",
+
+
+
+  "bn_page_details": "This is a Profile Page",
+  "bn_book_details": "This is a Book Page",
+  "bn_cart_details": "This is a Carts Page",
+
+
+  "dark_mood": "Dark Mood",
+  "account_info": "Account Information",
+  "orders": "Orders",
+  "my_carts": "My Carts",
+  "love": "Wishlist",
+  "settings": "Setting",
+  "logout": "Logout",
+
+
+
+  "business": "Business",
+  "history": "History",
+  "programming": "Programming",
+  "physics": "Physics"
+
+
+
+
+
+
+
+
+
+
+
+}
