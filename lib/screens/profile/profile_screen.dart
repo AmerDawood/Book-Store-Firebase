@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../fb_controller/fb_auth_controller.dart';
 import '../../shared_preferences/user_preferences_controler.dart';
@@ -20,44 +21,6 @@ class _ProfileScreenState extends State<ProfileScreen> with Helpers {
   late double width;
   late double height;
 
-  bool _isLoading = false;
-  String email ='';
-  String name='';
-
-
-
-
-
-
-  void getUserData()async{
-    _isLoading = true;
-
-    try{
-      final DocumentSnapshot userDoc =
-      await FirebaseFirestore.instance.collection('users').
-      doc(UserPreferenceController().userInformation.id).
-      get();
-      if (userDoc == null){
-        return;
-      }else{
-        setState(() {
-          email = userDoc.get('email');
-          name = userDoc.get('name');
-        });
-      }
-    }catch (e){
-      //
-    }
-  }
-
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    getUserData();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,61 +33,46 @@ class _ProfileScreenState extends State<ProfileScreen> with Helpers {
             padding: EdgeInsets.only(right: 20.0,left: 15),
             child: Row(
               children: [
-                Icon(Iconsax.edit, color: Colors.black45),
+                IconButton(
+                  icon: Icon(Iconsax.edit, color: Colors.black45),
+                  onPressed: (){
+                    Navigator.pushReplacementNamed(context, '/update_profile');
+                  },
+                ),
               ],
             ),
           ),
         ],
       ),
-      body: SingleChildScrollView(
+      body:
+      SingleChildScrollView(
         padding: EdgeInsets.symmetric(vertical: 20),
         child: Column(
           children: [
             SizedBox(
-              height: 115,
-              width: 115,
+              height: 100,
+              width: 100,
               child: Stack(
                 fit: StackFit.expand,
                 clipBehavior: Clip.none,
                 children: [
                   CircleAvatar(
-                    // backgroundImage: AssetImage("assets/images/Profile Image.png"),
+                    backgroundImage: AssetImage("images/user.jpg"),
                     backgroundColor: Colors.grey.shade300,
                   ),
-                  Positioned(
-                    right: -16,
-                    bottom: 0,
-                    child: SizedBox(
-                      height: 46,
-                      width: 46,
-                      child: TextButton(
-                          style: TextButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50),
-                              side: BorderSide(color: Colors.white),
-                            ),
-                            primary: Colors.white,
-                            backgroundColor: Color(0xFFF5F6F9),
-                          ),
-                          onPressed: () {},
-                          child: Icon(
-                            Iconsax.user_add,
-                            color: Colors.black,
-                          )),
-                    ),
-                  )
+
                 ],
               ),
             ),
             SizedBox(height: 20),
             ProfileMenu(
-              text: '$name',
+              text: UserPreferenceController().name,
               icon: Icon(Iconsax.text),
               press: () => {
               },
             ),
             ProfileMenu(
-              text: '${email}',
+              text: UserPreferenceController().email,
               icon: Icon(Icons.email),
               press: () {},
             ),
@@ -147,16 +95,14 @@ class _ProfileScreenState extends State<ProfileScreen> with Helpers {
                     Expanded(child: Text('*****')),
                     IconButton(
                       onPressed: () async {
-                     Navigator.pushReplacementNamed(context, '/update_profile');
+
                       },
-                      icon: Icon(Iconsax.arrow_left,color: Colors.black,),
+                      icon: Icon(Iconsax.arrow_circle_right,color: Colors.black,),
                     ),
                   ],
                 ),
               ),
             ),
-
-
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: TextButton(

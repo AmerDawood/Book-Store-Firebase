@@ -1,4 +1,5 @@
 
+import 'package:book_store/fb_controller/firestore_controller.dart';
 import 'package:book_store/shared_preferences/user_preferences_controler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -50,12 +51,18 @@ Scaffold.of(context).openDrawer();
               children: [
                 IconButton(
                   icon: Icon(Iconsax.heart, color: Colors.black45),
-                  onPressed: (){
-
+                  onPressed: ()async{
+                    print(UserPreferenceController().id);
+                    print(UserPreferenceController().name);
+                    print(UserPreferenceController().email);
+                    // print(UserPreferenceController().id);
                   },
                 ),
-                const SizedBox(width: 15.0),
-                Icon(Iconsax.notification, color: Colors.black45),
+                const SizedBox(width: 10.0),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Icon(Iconsax.notification, color: Colors.black45),
+                ),
               ],
             ),
           ),
@@ -151,8 +158,6 @@ Scaffold.of(context).openDrawer();
     );
   }
 }
-
-
 
 class SearchWidget extends StatelessWidget {
   final String text;

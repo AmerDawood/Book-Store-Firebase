@@ -37,25 +37,25 @@ class FbFireStoreController {
     });
   }
 
-  Future<bool> updateUser( {required BuildContext context, required Users user}) async {
-    bool secondUpdate = await _firebaseFirestore
-        .collection('users')
-        .doc(user.id)
-        .update(user.toMap())
-        .then((value) => true)
-        .catchError((error) => false);
-
-    bool result = secondUpdate;
-    if (result) {
-      UserPreferenceController().saveUsers(
-        users: user,
-        email: UserPreferenceController().userInformation.email,
-        password: UserPreferenceController().userInformation.password,
-      );
-    }
-
-    return result;
-  }
+  // Future<bool> updateUser( {required BuildContext context, required Users user}) async {
+  //   bool secondUpdate = await _firebaseFirestore
+  //       .collection('users')
+  //       .doc(user.id)
+  //       .update(user.toMap())
+  //       .then((value) => true)
+  //       .catchError((error) => false);
+  //
+  //   bool result = secondUpdate;
+  //   if (result) {
+  //     UserPreferenceController().saveUsers(
+  //       users: user,
+  //       email: UserPreferenceController().userInformation.email,
+  //       password: UserPreferenceController().userInformation.password,
+  //     );
+  //   }
+  //
+  //   return result;
+  // }
 
 
 

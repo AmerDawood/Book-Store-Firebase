@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:book_store/model/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -31,13 +32,12 @@ class FbAuthController with Helpers {
           if (user != null) {
             await UserPreferenceController().saveUsers(
               email: email,
-              password: password,
+              name: password,
               users: await FbFireStoreController().readUser(
-                  id: user.uid.toString(),
+                id: user.uid.toString(),
               ),
             );
-            print(
-                '------------------------------------------------------- after read user');
+
           }
           return true;
         } else {
@@ -61,16 +61,16 @@ class FbAuthController with Helpers {
 
   Future<bool> createAccount(
       {required BuildContext context,
-      required String email,
-      required String password,
+        required String email,
+        required String password,
         required String name,
 
       }) async {
     try {
       UserCredential userCredential = await _firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
-       final User? user =  _firebaseAuth.currentUser;
-       final uid= user!.uid;
+      final User? user =  _firebaseAuth.currentUser;
+      final uid= user!.uid;
       FirebaseFirestore.instance.collection('users').doc(uid).set(
         {
           'id': uid,

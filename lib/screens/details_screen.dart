@@ -191,7 +191,7 @@ class _DetailScreenState extends State<DetailScreen> with Helpers{
     );
     bool status = await FbFireStoreController().addProductToCart(
         productId: productId,
-        userId: UserPreferenceController().userInformation.id,
+        userId: UserPreferenceController().id,
     );
     Navigator.pop(context);
     if(status){

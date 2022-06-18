@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -20,7 +19,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
     // TODO: implement initState
     super.initState();
     Future.delayed(Duration(seconds: 3),(){
-      String routeName =UserPreferenceController().loggedIn ?'/app_screen':'/login_screen';
+      String routeName =UserPreferenceController().loggedIn ?'/app_screen':'/page_view_screen';
       Navigator.pushReplacementNamed(context, routeName);
     });
   }

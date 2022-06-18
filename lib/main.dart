@@ -8,6 +8,7 @@ import 'package:book_store/screens/auth/reset_password.dart';
 import 'package:book_store/screens/details_screen.dart';
 import 'package:book_store/screens/home_screen.dart';
 import 'package:book_store/screens/launch_screen.dart';
+import 'package:book_store/screens/page_view_screen.dart';
 import 'package:book_store/screens/products_screen.dart';
 import 'package:book_store/screens/profile/profile_screen.dart';
 import 'package:book_store/screens/profile/update_profile.dart';
@@ -60,6 +61,7 @@ class MainMaterialApp extends StatelessWidget {
       initialRoute: '/launch_screen',
       routes: {
         '/launch_screen': (context) => LaunchScreen(),
+        '/page_view_screen': (context) => PageViewScreen(),
         '/login_screen': (context) => LoginScreen(),
         '/register_screen': (context) => RegisterScreen(),
         '/reset_password': (context) => ResetPassword(),

@@ -1,8 +1,8 @@
 import 'package:book_store/screens/auth/login_screen.dart';
 import 'package:book_store/utility/helpers.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import '../../fb_controller/fb_auth_controller.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 class ResetPassword extends StatefulWidget {
   const ResetPassword({Key? key}) : super(key: key);
@@ -33,30 +33,7 @@ class _ResetPasswordState extends State<ResetPassword> with Helpers {
 
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        elevation: 0,
-        leading: Builder(
-          builder: (context) {
-            return IconButton(onPressed: () {
-              Scaffold.of(context).openDrawer();
-            }, icon: Icon(Iconsax.menu,color: Colors.black45,),
-            );
-          },
-        ),
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(right: 23.0),
-            child: Row(
-              children: [
-                Icon(Iconsax.heart, color: Colors.black45),
-                const SizedBox(width: 15.0),
-                Icon(Iconsax.notification, color: Colors.black45),
-              ],
-            ),
-          ),
-        ],
-      ),
+
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(30.0),
@@ -67,7 +44,7 @@ class _ResetPasswordState extends State<ResetPassword> with Helpers {
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.all(20.0),
                   border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  labelText: 'Email Address',
+                  labelText: AppLocalizations.of(context)!.email,
                   labelStyle: TextStyle(color: Colors.grey, fontWeight: FontWeight.w600, fontSize: 14.0),
                 ),
               ),
@@ -83,7 +60,7 @@ class _ResetPasswordState extends State<ResetPassword> with Helpers {
                         borderRadius: BorderRadius.all(Radius.circular(15.0))
                     ),
                     child: Center(
-                      child: Text('Reset Password', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 15.0)),
+                      child: Text(AppLocalizations.of(context)!.reset, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 15.0)),
                     ),
                 ),
               ),

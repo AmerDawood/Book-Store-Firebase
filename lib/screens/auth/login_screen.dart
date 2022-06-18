@@ -28,8 +28,7 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
     _passwordEditingController = TextEditingController();
 
   }
-
-
+  
   @override
   void dispose() {
     // TODO: implement dispose
@@ -38,7 +37,6 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
 
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
               ),
               const SizedBox(height: 40.0),
               GestureDetector(
-                onTap: ()async => performLogin(),
+                onTap: ()async =>await performLogin(),
                 child: Container(
                     height: 60.0,
                     width: size.width,
@@ -205,10 +203,11 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
           return AppScreen();
         }
       ),
-
       );
+
+      // );
     } else {
-      showSnackBar(context: context, message: 'SOMETHING ERROR',error: true);
+      // showSnackBar(context: context, message: 'SOMETHING ERROR',error: true);
     }
   }
 }

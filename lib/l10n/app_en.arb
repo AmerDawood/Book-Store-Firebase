@@ -1,7 +1,9 @@
 {
-  "app_name": "Welcome App",
+  "app_name": "Book Store 2022",
   "login": "Sign In",
   "register": "Sign Up",
+  "reset": "Reset Password",
+
   "email": "Email address",
   "password": "password",
   "f_name": "Full Name",
@@ -23,6 +25,14 @@
 
 
 
+  "start_now": "Start Now",
+  "skip": "SKIP",
+
+
+
+  "title1": "Welcome Back 1",
+  "title2": "Welcome Back 2",
+  "title3": "Welcome Back 3",
 
 
 
