@@ -1,16 +1,28 @@
-# book_store
+# Book-Store
 
-A new Flutter project (Firebase).
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+### Features :
+- Splach Screen & Page View Screen
 
-A few resources to get you started if this is your first Flutter project:
+- Sign-In, Sign-Up,forget password and LogOut using Email & Password
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- login using google account & facebook account
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- profile screen / Update Profile
+
+- Products Screen 
+
+- Details Screen 
+
+- Add Products to carts
+
+- Using Multi Language(Arabic & English)
+
+- Check out your Cart and Make an Order.
+
+- Using Responsive UI.
+
+- Using Firebase & shared preference.
+ 
+- Using Provider as state management.
