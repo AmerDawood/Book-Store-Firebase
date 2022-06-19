@@ -13,8 +13,10 @@ class PageViewIndicator extends StatelessWidget {
       height: 10,
       decoration: BoxDecoration(
         shape:BoxShape.circle,
-        color:selected? Colors.amber:Colors.grey,
+        color:selected? Color(0xff9941d8):Color(0xffe4a972),
       ),
     );
   }
 }
+
+

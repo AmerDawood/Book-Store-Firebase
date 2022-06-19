@@ -1,4 +1,3 @@
-import 'package:book_store/utility/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:iconsax/iconsax.dart';
@@ -8,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../fb_controller/firestore_controller.dart';
 import '../provider/product_provider.dart';
 import '../shared_preferences/user_preferences_controler.dart';
+import '../utilities/helpers.dart';
 
 // Detail screen.
 class DetailScreen extends StatefulWidget {

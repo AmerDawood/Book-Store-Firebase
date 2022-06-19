@@ -1,5 +1,3 @@
-import 'package:book_store/fb_controller/firestore_controller.dart';
-import 'package:book_store/utility/helpers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +8,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../fb_controller/fb_auth_controller.dart';
 import '../../shared_preferences/user_preferences_controler.dart';
+import '../../utilities/helpers.dart';
 
 class ProfileScreen extends StatefulWidget {
 
@@ -21,13 +20,62 @@ class _ProfileScreenState extends State<ProfileScreen> with Helpers {
   late double width;
   late double height;
 
+
+  bool _isLoading = false;
+  String email ='';
+  String name='';
+
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  bool isSameUser =true;
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getUserData();
+  }
+
+
+
+  void getUserData()async {
+    _isLoading = true;
+
+    try{
+      final DocumentSnapshot userDoc =
+      await FirebaseFirestore.instance.collection('users').doc(UserPreferenceController().id).get();
+      if (userDoc == null){
+        return;
+      }else{
+        _isLoading = false;
+        setState(() {
+          email = userDoc.get('email');
+          name = userDoc.get('name');
+        });
+        User?user =_firebaseAuth.currentUser;
+        String uid= user!.uid;
+        setState(() {
+
+        });
+      }
+    }catch (e){
+
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
-
+        centerTitle: true,
+        title: Text('Profile Screen',
+          style: TextStyle(
+            fontFamily: 'Cairo',
+            color: Colors.black45,
+          ),),
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 20.0,left: 15),
@@ -44,7 +92,13 @@ class _ProfileScreenState extends State<ProfileScreen> with Helpers {
           ),
         ],
       ),
-      body:
+      body:_isLoading?Container(
+        child: Center(
+            child: LoadingAnimationWidget.staggeredDotsWave(
+              color: Colors.black,
+              size: 25,
+            ),),
+      ):
       SingleChildScrollView(
         padding: EdgeInsets.symmetric(vertical: 20),
         child: Column(
@@ -66,13 +120,13 @@ class _ProfileScreenState extends State<ProfileScreen> with Helpers {
             ),
             SizedBox(height: 20),
             ProfileMenu(
-              text: UserPreferenceController().name,
+              text:name,
               icon: Icon(Iconsax.text),
               press: () => {
               },
             ),
             ProfileMenu(
-              text: UserPreferenceController().email,
+              text:email,
               icon: Icon(Icons.email),
               press: () {},
             ),

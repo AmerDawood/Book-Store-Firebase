@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 class PageViewWidget extends StatelessWidget {
   final String title;
+  final String imagePath;
 
 
-  PageViewWidget({required this.title});
+  PageViewWidget({required this.title,required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -11,12 +12,13 @@ class PageViewWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          width: 80,
-          height: 80,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50),
-            color: Colors.amber,
-          ),
+          width: 200,
+          height: 200,
+          // decoration: BoxDecoration(
+          //   borderRadius: BorderRadius.circular(50),
+          //   color: Colors.amber,
+          // ),
+          child: Image.asset(imagePath),
         ),
         SizedBox(
           height: 20,

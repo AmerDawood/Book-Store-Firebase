@@ -21,6 +21,8 @@ class FbFireStoreController {
 
 
 
+
+
   Future<Users> readUser({required String id}) async {
     return await _firebaseFirestore
         .collection('users')
@@ -32,30 +34,32 @@ class FbFireStoreController {
       user.name = value.docs.first.get('name');
       user.email = value.docs.first.get('email');
       return user;
-    }, onError: (e) {
+    },
+        onError: (e) {
       return Users();
     });
   }
 
-  // Future<bool> updateUser( {required BuildContext context, required Users user}) async {
-  //   bool secondUpdate = await _firebaseFirestore
-  //       .collection('users')
-  //       .doc(user.id)
-  //       .update(user.toMap())
-  //       .then((value) => true)
-  //       .catchError((error) => false);
-  //
-  //   bool result = secondUpdate;
-  //   if (result) {
-  //     UserPreferenceController().saveUsers(
-  //       users: user,
-  //       email: UserPreferenceController().userInformation.email,
-  //       password: UserPreferenceController().userInformation.password,
-  //     );
-  //   }
-  //
-  //   return result;
-  // }
+  Future<bool> updateUser( {required BuildContext context, required Users user}) async {
+    bool secondUpdate = await _firebaseFirestore
+        .collection('users')
+        .doc(user.id)
+        .update(user.toMap())
+        .then((value) => true)
+        .catchError((error) => false);
+
+    bool result = secondUpdate;
+    Users users = Users();
+    if (result) {
+      UserPreferenceController().saveUsers(
+        users: users,
+        email: user.email,
+        name: users.name,
+      );
+    }
+
+    return result;
+  }
 
 
 
@@ -72,40 +76,43 @@ class FbFireStoreController {
         .then((value) => true)
         .catchError((error) => false);
   }
-  // to get the product into cart  (Read from carts in Firebase).
 
+
+  // to get the product into cart  (Read from carts in Firebase).
   Future<List<Product>> getProductsCart({required String? userId}) async {
     List<Product> products = [];
     return await _firebaseFirestore
         .collection('Carts')
-        .where('userId', isEqualTo: userId)
+        .where('id', isEqualTo: userId)
         .get()
         .then((value) async {
-      for (var element in value.docs) {
-        products.add(await getProduct(element.get('productId')));
+      for (var element in value.docs){
+        products.add(
+            await getProduct(element.get('id')));
       }
       return products;
     }, onError: (e) {
       return products;
-    });
+    }
+    );
   }
 
   Future<Product> getProduct(String productId) async {
-    Product product = Product(image: '',name: '',description: '',price: '',id: '',);
-    return await _firebaseFirestore.collection('Products').doc(productId).get().then(
+    Product product = Product(id: '', image: '', name: '', price: '');
+    return await _firebaseFirestore.collection('books').doc(productId).get().then(
             (value) {
           product = Product(
             id: productId,
-            image: value.get('image'),
-            description: value.get(''),
+            image: value.get('imagePath'),
+            name: value.get('title'),
             price: value.get('price'),
-            name: value.get('name'),
           );
           return product;
         }, onError: (e) {
-      return product;
+        return product;
     });
   }
+
 
   Future<bool> deleteCart(String productId,String userId)async{
     return await _firebaseFirestore.collection('Carts').get().then((value){

@@ -8,7 +8,9 @@
   "password": "password",
   "f_name": "Full Name",
   "confirm_password": "Confirm Password",
-  "no_account": "Don'\t have an account ?",
+  "no_account": "Don't have an account ? ",
+  "forget": "forget password",
+
   "or": "or",
   "google": "Google",
   "facebook": "Facebook",

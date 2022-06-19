@@ -47,6 +47,9 @@ class _PageViewScreenState extends State<PageViewScreen> {
                 },
                 child: Text(
                   AppLocalizations.of(context)!.start_now,
+                  style: TextStyle(
+                    color:  Color(0xffe4a972),
+                  ),
                 ),
               ),
             ),
@@ -59,6 +62,9 @@ class _PageViewScreenState extends State<PageViewScreen> {
                 },
                 child: Text(
                   AppLocalizations.of(context)!.skip,
+                  style: TextStyle(
+                    color: Color(0xffe4a972),
+                  ),
                 ),
               ),
             ),
@@ -74,12 +80,15 @@ class _PageViewScreenState extends State<PageViewScreen> {
               children: [
                 PageViewWidget(
                   title: AppLocalizations.of(context)!.title1,
+                  imagePath: 'images/page1.jpg',
                 ),
                 PageViewWidget(
                   title: AppLocalizations.of(context)!.title2,
+                  imagePath: 'images/page2.jpg',
                 ),
                 PageViewWidget(
                   title: AppLocalizations.of(context)!.title3,
+                  imagePath: 'images/page2.jpg',
                 ),
               ],
             ),
@@ -115,7 +124,7 @@ class _PageViewScreenState extends State<PageViewScreen> {
                   },
                   icon: Icon(
                     Icons.arrow_back_ios,
-                    color: _currentPage == 0 ? Colors.grey : Colors.amber,
+                    color: _currentPage == 0 ?  Color(0xff9941d8):Color(0xffe4a972),
                   ),
                 ),
                 IconButton(
@@ -125,7 +134,7 @@ class _PageViewScreenState extends State<PageViewScreen> {
                   },
                   icon: Icon(
                     Icons.arrow_forward_ios,
-                    color: _currentPage == 2 ? Colors.grey : Colors.amber,
+                    color: _currentPage == 2 ? Color(0xff9941d8):Color(0xffe4a972),
                   ),
                 ),
               ],
@@ -147,6 +156,7 @@ class _PageViewScreenState extends State<PageViewScreen> {
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
+                  primary:Color(0xff9941d8),
                   minimumSize: Size(double.infinity, 50),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),

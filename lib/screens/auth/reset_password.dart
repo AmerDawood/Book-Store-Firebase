@@ -1,8 +1,10 @@
 import 'package:book_store/screens/auth/login_screen.dart';
-import 'package:book_store/utility/helpers.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import '../../fb_controller/fb_auth_controller.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
+
+import '../../utilities/helpers.dart';
 
 class ResetPassword extends StatefulWidget {
   const ResetPassword({Key? key}) : super(key: key);
@@ -27,19 +29,36 @@ class _ResetPasswordState extends State<ResetPassword> with Helpers {
     _emailEditingController.dispose();
     super.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
 
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        elevation: 0,
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: (){
+            Navigator.pushReplacementNamed(context, '/login_screen');
+          },
+          icon: Icon(Iconsax.back_square,color: Colors.black45,),
+        ),
+        title: Text(AppLocalizations.of(context)!.reset,
+            style: TextStyle(
+              fontSize: 23.0,
+              fontWeight: FontWeight.w800,
+              color: Colors.black,
+              fontFamily: 'Cairo',
+            )),
+      ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(30.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            // mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              SizedBox(height: 100,),
               TextField(
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.all(20.0),

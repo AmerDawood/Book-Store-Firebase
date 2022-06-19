@@ -1,9 +1,11 @@
 import 'package:book_store/screens/app.dart';
 import 'package:book_store/screens/auth/login_screen.dart';
-import 'package:book_store/utility/helpers.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import '../../fb_controller/fb_auth_controller.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
+
+import '../../utilities/helpers.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -53,75 +55,85 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
           onPressed: (){
             Navigator.pushReplacementNamed(context, '/login_screen');
           },
-          icon: Icon(Icons.arrow_back,color: Colors.black,),
+          icon: Icon(Iconsax.back_square,color: Colors.black45,),
         ),
         title: Text(AppLocalizations.of(context)!.register,
-            style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w800, color: Colors.black)),
+            style: TextStyle(fontSize: 23.0,
+                fontWeight: FontWeight.w800, color: Colors.black,
+
+              fontFamily: 'Cairo',
+
+            )),
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(30.0),
+      body: Padding(
+        padding: EdgeInsets.all(30.0),
+        child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextField(
-                controller: _nameEditingController,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all(20.0),
-                  border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  labelText: AppLocalizations.of(context)!.f_name,
-                  labelStyle: TextStyle(color: Colors.grey, fontWeight: FontWeight.w600, fontSize: 14.0),
-                ),
-              ),
-              const SizedBox(height: 20.0),
-              TextField(
-                controller: _emailEditingController,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all(20.0),
-                  border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  labelText: AppLocalizations.of(context)!.email,
-                  labelStyle: TextStyle(color: Colors.grey, fontWeight: FontWeight.w600, fontSize: 14.0),
-                ),
-              ),
-              const SizedBox(height: 20.0),
-              TextField(
-                controller: _passwordEditingController,
-                obscureText: true,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all(20.0),
-                  border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  labelText: AppLocalizations.of(context)!.password,
-                  labelStyle: TextStyle(color: Colors.grey, fontWeight: FontWeight.w600, fontSize: 14.0),
-                ),
-              ),
-              const SizedBox(height: 20.0),
-              TextField(
-                controller: _confirmPasswordEditingController,
-                obscureText: true,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all(20.0),
-                  border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  labelText: AppLocalizations.of(context)!.confirm_password,
-                  labelStyle: TextStyle(color: Colors.grey, fontWeight: FontWeight.w600, fontSize: 14.0),
-                ),
-              ),
-              const SizedBox(height: 40.0),
-              GestureDetector(
-                onTap: () async => await Regiser(),
-                child: Container(
-                    height: 60.0,
-                    width: size.width,
-                    decoration: BoxDecoration(
-                        color: Color(0xFF653bbf),
-                        borderRadius: BorderRadius.all(Radius.circular(15.0))
-                    ),
-                    child: Center(
-                      child: Text(AppLocalizations.of(context)!.register, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 15.0)),
-                    ),
-                ),
-              ),
-              const SizedBox(height: 30.0),
-            ],
+             children: [
+               SizedBox(height: 60,),
+               Column(
+                 mainAxisAlignment: MainAxisAlignment.center,
+                 children: [
+                   TextField(
+                     controller: _nameEditingController,
+                     decoration: InputDecoration(
+                       contentPadding: EdgeInsets.all(20.0),
+                       border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                       labelText: AppLocalizations.of(context)!.f_name,
+                       labelStyle: TextStyle(color: Colors.grey, fontWeight: FontWeight.w600, fontSize: 14.0),
+                     ),
+                   ),
+                   const SizedBox(height: 20.0),
+                   TextField(
+                     controller: _emailEditingController,
+                     decoration: InputDecoration(
+                       contentPadding: EdgeInsets.all(20.0),
+                       border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                       labelText: AppLocalizations.of(context)!.email,
+                       labelStyle: TextStyle(color: Colors.grey, fontWeight: FontWeight.w600, fontSize: 14.0),
+                     ),
+                   ),
+                   const SizedBox(height: 20.0),
+                   TextField(
+                     controller: _passwordEditingController,
+                     obscureText: true,
+                     decoration: InputDecoration(
+                       contentPadding: EdgeInsets.all(20.0),
+                       border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                       labelText: AppLocalizations.of(context)!.password,
+                       labelStyle: TextStyle(color: Colors.grey, fontWeight: FontWeight.w600, fontSize: 14.0),
+                     ),
+                   ),
+                   const SizedBox(height: 20.0),
+                   TextField(
+                     controller: _confirmPasswordEditingController,
+                     obscureText: true,
+                     decoration: InputDecoration(
+                       contentPadding: EdgeInsets.all(20.0),
+                       border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                       labelText: AppLocalizations.of(context)!.confirm_password,
+                       labelStyle: TextStyle(color: Colors.grey, fontWeight: FontWeight.w600, fontSize: 14.0),
+                     ),
+                   ),
+                   const SizedBox(height: 40.0),
+                   GestureDetector(
+                     onTap: () async => await Regiser(),
+                     child: Container(
+                       height: 60.0,
+                       width: size.width,
+                       decoration: BoxDecoration(
+                           color: Color(0xFF653bbf),
+                           borderRadius: BorderRadius.all(Radius.circular(15.0))
+                       ),
+                       child: Center(
+                         child: Text(AppLocalizations.of(context)!.register, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 15.0)),
+                       ),
+                     ),
+                   ),
+                   const SizedBox(height: 30.0),
+                 ],
+               ),
+             ],
           ),
         ),
       ),

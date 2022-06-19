@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../fb_controller/fb_auth_controller.dart';
 import '../shared_preferences/user_preferences_controler.dart';
-import '../utility/helpers.dart';
+import '../utilities/helpers.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -113,7 +113,10 @@ class _MyDrawerState extends State<MyDrawer> with Helpers {
                       // trailing: SwitchButtonFlutter(),
                     ),
                     InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushReplacementNamed(
+                              context, '/test');
+                        },
                         child: CardInDrawer(
                           iconUrl: 'images/info.svg',
                           name: AppLocalizations.of(context)!.account_info,

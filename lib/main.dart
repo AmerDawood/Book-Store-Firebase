@@ -58,7 +58,7 @@ class MainMaterialApp extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       locale: Locale(Provider.of<ChangeLanguageNotifier>(context).languageCode),
       // locale: Locale('en'),
-      initialRoute: '/launch_screen',
+      initialRoute: '/page_view_screen',
       routes: {
         '/launch_screen': (context) => LaunchScreen(),
         '/page_view_screen': (context) => PageViewScreen(),
@@ -71,7 +71,7 @@ class MainMaterialApp extends StatelessWidget {
         '/app_screen': (context) => AppScreen(),
         '/setting_screen': (context) => SettingScreen(),
         '/profile_screen': (context) => ProfileScreen(),
-        '/update_profile': (context) => UpdateProfile(),
+        '/update_profile': (context) => EditProfileScreen(),
       },
     );
   }

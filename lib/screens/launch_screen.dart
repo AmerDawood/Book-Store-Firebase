@@ -34,14 +34,28 @@ class _LaunchScreenState extends State<LaunchScreen> {
             begin:AlignmentDirectional.topStart,
             end: AlignmentDirectional.bottomEnd,
             colors: [
-              Colors.blueGrey,
-              Colors.white54,
+              Color(0xffe4a972),
+              Color(0xff9941d8),
             ],
           ),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+           Padding(
+             padding: const EdgeInsets.only(
+               top: 20,
+             ),
+             child: Container(
+               height: 200,
+               width: 200,
+               child:  Image(
+                 image: AssetImage(
+                   'images/lanch_book_app.png',
+                 ),
+               ),
+             ),
+           ),
             Text(
               AppLocalizations.of(context)!.app_name,
               style: TextStyle(

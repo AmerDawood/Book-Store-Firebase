@@ -1,13 +1,6 @@
 class Product{
     late String  name, image, description,price, id;
 
-    // Product({
-    //   required this.image,
-    //   required this.name,
-    //   required this.description,
-    //   required this.price,
-    //   required this.id,
-    // });
     Product({
       this.id = '0',
       this.image = '',

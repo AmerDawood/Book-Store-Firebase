@@ -7,20 +7,18 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../shared_preferences/user_preferences_controler.dart';
-import '../utility/helpers.dart';
+import '../utilities/helpers.dart';
 import 'firestore_controller.dart';
-
 
 typedef UserAuthStates = void Function({required bool loggedIn});
 
 class FbAuthController with Helpers {
-  // GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   Future<bool> signIn(
       {required BuildContext context,
-        required String email,
-        required String password}) async {
+      required String email,
+      required String password}) async {
     try {
       UserCredential userCredential = await _firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password);
@@ -37,7 +35,6 @@ class FbAuthController with Helpers {
                 id: user.uid.toString(),
               ),
             );
-
           }
           return true;
         } else {
@@ -58,19 +55,18 @@ class FbAuthController with Helpers {
     return false;
   }
 
-
-  Future<bool> createAccount(
-      {required BuildContext context,
-        required String email,
-        required String password,
-        required String name,
-
-      }) async {
+  Future<bool> createAccount({
+    required BuildContext context,
+    required String email,
+    required String password,
+    required String name,
+  }) async {
     try {
       UserCredential userCredential = await _firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
-      final User? user =  _firebaseAuth.currentUser;
-      final uid= user!.uid;
+      final User? user = _firebaseAuth.currentUser;
+      final uid = user!.uid;
+      // save user in firebase in collection users
       FirebaseFirestore.instance.collection('users').doc(uid).set(
         {
           'id': uid,
@@ -90,16 +86,15 @@ class FbAuthController with Helpers {
     return false;
   }
 
-
   //-------------- (Sign in using Google)------------------
-
 
   Future<UserCredential> signInWithGoogle() async {
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
     // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
 
     // Create a new credential
     final credential = GoogleAuthProvider.credential(
@@ -110,44 +105,38 @@ class FbAuthController with Helpers {
     // Once signed in, return the UserCredential
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
-  //--------------------------------
-
-
 
   //-------------- (Sign in using Facebook)------------------
-
 
   Future<UserCredential> signInWithFacebook() async {
     // Trigger the sign-in flow
     final LoginResult loginResult = await FacebookAuth.instance.login();
 
     // Create a credential from the access token
-    final OAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(loginResult.accessToken!.token);
+    final OAuthCredential facebookAuthCredential =
+        FacebookAuthProvider.credential(loginResult.accessToken!.token);
 
     // Once signed in, return the UserCredential
     return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
   }
 
-  //--------------------------------
+  //-------------(Sign Out)-------------------
 
   Future<void> signOut() async {
     await _firebaseAuth.signOut();
   }
 
+  // -----------(return if user logged in or not)------------
   bool loggedIn() => _firebaseAuth.currentUser != null;
 
-  StreamSubscription<User?> checkUserStates(UserAuthStates userAuthStates) {
-    return _firebaseAuth.authStateChanges().listen((event) {
-      userAuthStates(loggedIn: event != null);
-    });
-  }
-
+  // -----------(if you forget password ypu should use reset password)------------
   Future<bool> resetPassword(
       {required String email, required BuildContext context}) async {
     await _firebaseAuth.sendPasswordResetEmail(email: email);
     return true;
   }
 
+  // ----------(some of type error in sign in & sign up)-----------
   void _controlException(
       BuildContext context, FirebaseAuthException exception) {
     showSnackBar(
@@ -165,8 +154,4 @@ class FbAuthController with Helpers {
         break;
     }
   }
-
-
-
-
 }
