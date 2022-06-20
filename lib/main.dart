@@ -1,3 +1,4 @@
+import 'package:book_store/fb_controller/fb_notifications.dart';
 import 'package:book_store/provider/change_language_notifire.dart';
 import 'package:book_store/provider/new_product_provider.dart';
 import 'package:book_store/provider/product_provider.dart';
@@ -25,6 +26,7 @@ void main() async {
   await UserPreferenceController().initSharedPreference();
   await AppSettingsPreferances().initPreferances();
   await Firebase.initializeApp();
+  await FbNotifications.initNotifications();
   runApp(const MyApp());
 }
 
@@ -58,7 +60,7 @@ class MainMaterialApp extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       locale: Locale(Provider.of<ChangeLanguageNotifier>(context).languageCode),
       // locale: Locale('en'),
-      initialRoute: '/page_view_screen',
+      initialRoute: '/launch_screen',
       routes: {
         '/launch_screen': (context) => LaunchScreen(),
         '/page_view_screen': (context) => PageViewScreen(),

@@ -1,3 +1,4 @@
+import 'package:book_store/shared_preferences/app_preferences_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:iconsax/iconsax.dart';
@@ -6,8 +7,10 @@ import 'package:provider/provider.dart';
 
 import '../fb_controller/firestore_controller.dart';
 import '../provider/product_provider.dart';
+
 import '../shared_preferences/user_preferences_controler.dart';
 import '../utilities/helpers.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 // Detail screen.
 class DetailScreen extends StatefulWidget {
@@ -25,12 +28,15 @@ class _DetailScreenState extends State<DetailScreen> with Helpers{
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           leading: IconButton(
             onPressed: () => Navigator.of(context).pop(),
-            icon: Icon(Iconsax.arrow_left, color: Colors.grey[600]),
+            icon: Icon(Iconsax.back_square, color: Colors.grey[600]),
           ),
           actions: [
-            Container(
-              margin: EdgeInsets.only(right: 20.0),
-              child: Icon(Iconsax.save_add, color: Colors.grey[600]),
+            Padding(
+              padding: const EdgeInsets.only(left: 12),
+              child: Container(
+                margin: EdgeInsets.only(right: 20.0),
+                child: Icon(Iconsax.save_add, color: Colors.grey[600]),
+              ),
             ),
           ],
         ),
@@ -118,11 +124,7 @@ class _DetailScreenState extends State<DetailScreen> with Helpers{
                             color: Colors.amber,
                           ),
                           onRatingUpdate: (rating) {
-                            //
-                            //
-                            //
-                            //
-                            //
+
                           },
                         ),
                         const SizedBox(width: 10.0),
@@ -176,7 +178,9 @@ class _DetailScreenState extends State<DetailScreen> with Helpers{
               ),
             )
           ],
-        )));
+        ),
+
+        ));
   }
 
   Future performAddToCart(String productId) async {
@@ -193,11 +197,12 @@ class _DetailScreenState extends State<DetailScreen> with Helpers{
         productId: productId,
         userId: UserPreferenceController().id,
     );
+
     Navigator.pop(context);
     if(status){
-      showSnackBar(context: context, message: 'Added To Cart Successfully');
+      showSnackBar(context: context, message: AppLocalizations.of(context)!.message_add_cart_done);
     }else{
-      showSnackBar(context: context, message: 'Added To Cart Successfully');
+      showSnackBar(context: context, message: AppLocalizations.of(context)!.message_add_cart_error);
     }
   }
 }

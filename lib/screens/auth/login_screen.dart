@@ -1,4 +1,5 @@
 import 'package:book_store/fb_controller/fb_auth_controller.dart';
+import 'package:book_store/fb_controller/fb_notifications.dart';
 import 'package:book_store/screens/app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -14,14 +15,17 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> with Helpers {
+class _LoginScreenState extends State<LoginScreen> with Helpers , FbNotifications {
   late TextEditingController _emailEditingController;
   late TextEditingController _passwordEditingController;
+
+
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    requestNotificationPermissions();
     _emailEditingController = TextEditingController();
     _passwordEditingController = TextEditingController();
   }

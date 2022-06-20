@@ -11,7 +11,7 @@ class Product{
     Product.fromJson(Map<dynamic, dynamic> map) {
     name = map['name'];
     image = map['image'];
-    description = map['description'];
+    description = map['description_en'];
 
     price = map['price'];
     id = map['productId'];

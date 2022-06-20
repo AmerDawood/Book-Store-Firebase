@@ -1,4 +1,5 @@
 import 'package:book_store/constance/my_color.dart';
+import 'package:book_store/fb_controller/fb_notifications.dart';
 import 'package:book_store/screens/cart_screen.dart';
 import 'package:book_store/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class AppScreen extends StatefulWidget{
   State<AppScreen> createState() => _AppScreenState();
 }
 
-class _AppScreenState extends State<AppScreen> {
+class _AppScreenState extends State<AppScreen> with FbNotifications {
   late int _currentIndex = 0;
   final List<BnScreen> _bnScreen = <BnScreen>[
     BnScreen(widget: HomeScreen(), title: 'Book'),
@@ -22,8 +23,17 @@ class _AppScreenState extends State<AppScreen> {
     BnScreen(widget: ProfileScreen(), title: 'Profile'),
   ];
 
+
+  @override
+  void initState(){
+    super.initState();
+    initializeForegroundNotificationForAndroid();
+    manageNotificationAction();
+  }
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
 
       bottomNavigationBar: BottomNavigationBar(

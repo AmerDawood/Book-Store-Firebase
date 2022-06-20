@@ -5,7 +5,10 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 import '../fb_controller/firestore_controller.dart';
 import '../model/new_product_model.dart';
+import '../model/products_model.dart';
 import '../provider/new_product_provider.dart';
+import '../provider/product_provider.dart';
+import '../shared_preferences/app_preferences_controller.dart';
 
 class NewBooksWidget extends StatelessWidget {
   const NewBooksWidget({
@@ -34,33 +37,34 @@ class NewBooksWidget extends StatelessWidget {
                 itemCount: allNewProducts.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      Provider.of<NewProductProvider>(context,
-                          listen: false)
-                          .changeProduct(
-                        newProduct: NewProduct(
-                          image: allNewProducts[index].get('image'),
-                          name: allNewProducts[index].get('name'),
-                          description: allNewProducts[index].get('description'),
-                          price: allNewProducts[index].get('price'),
-                          productId: allNewProducts[index].id,
-                        ),
-                      );
-                      // Navigator.pushNamed(context, '/product_details_screen');
-                    },
+                  return
+                      GestureDetector(
+                        onTap: () {
+                          Provider.of<ProductProvider>(context,
+                              listen: false)
+                              .changeProduct(
+                            product: Product(
+                              id: allNewProducts[index].id,
+                              image: allNewProducts[index].get('image'),
+                              price: allNewProducts[index].get('price'),
+                              name: allNewProducts[index].get(AppSettingsPreferances().langCode=='ar'?'name_ar':'name_en',),
+                              description:allNewProducts[index].get(AppSettingsPreferances().langCode=='ar'?'description_ar':'description_en',),
+                            ),
+                          );
+                          Navigator.pushNamed(context, '/details_screen');
+                        },
                     child: Container(
                       width: 100.0,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Image.network('${allNewProducts[index].get('image')}', height: 140.0),
-                          const SizedBox(height: 10.0),
-                          Text('${allNewProducts[index].get('name')}',
+                          const SizedBox(height: 7.0),
+                          Text('${allNewProducts[index].get(AppSettingsPreferances().langCode=='ar'?'name_ar':'name_en',)}',
                               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14.0), overflow: TextOverflow.ellipsis),
-                          const SizedBox(height: 5.0),
+
                           RatingBar.builder(
-                            initialRating: 3.5,
+                            initialRating: allNewProducts[index].get('ratting'),
                             minRating: 1,
                             direction: Axis.horizontal,
                             allowHalfRating: true,

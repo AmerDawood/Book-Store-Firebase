@@ -62,16 +62,16 @@
   "business": "Business",
   "history": "History",
   "programming": "Programming",
-  "physics": "Physics"
+  "physics": "Physics",
 
 
 
 
 
+  "cart": "Cart Screen",
+  "profile": "Profile Screen",
 
 
-
-
-
-
+  "message_add_cart_done": "Added To Cart Successfully",
+  "message_add_cart_error": "Added To Cart Dos't Successfully"
 }

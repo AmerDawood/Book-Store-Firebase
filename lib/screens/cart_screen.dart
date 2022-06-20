@@ -1,5 +1,7 @@
+import 'package:book_store/shared_preferences/app_preferences_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 class CartScreen extends StatefulWidget {
   @override
@@ -22,7 +24,7 @@ class _CartScreenState extends State<CartScreen> {
           },
         ),
         centerTitle: true,
-        title: Text('Cart Screen',
+        title: Text(AppLocalizations.of(context)!.cart,
         style: TextStyle(
           fontFamily: 'Cairo',
           color: Colors.black45,
@@ -49,7 +51,9 @@ class _CartScreenState extends State<CartScreen> {
           ),
         ],
       ),
-      body: Container(),
+      body: Container(
+
+      ),
     );
   }
 }

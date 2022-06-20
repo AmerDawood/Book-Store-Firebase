@@ -1,3 +1,4 @@
+import 'package:book_store/shared_preferences/app_preferences_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -45,23 +46,25 @@ class PopularBooks extends StatelessWidget {
                           id: allProducts[index].id,
                           image: allProducts[index].get('image'),
                           price: allProducts[index].get('price'),
-                          name: allProducts[index].get('name'),
-                          description:allProducts[index].get('description'),
+                          name: allProducts[index].get(AppSettingsPreferances().langCode=='ar'?'name_ar':'name_en'),
+                          description:allProducts[index].get(AppSettingsPreferances().langCode=='ar'?'description_ar':'description_en',),
                         ),
                       );
                       Navigator.pushNamed(context, '/details_screen');
                     },
                     child: Container(
                       width: 100.0,
+
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Image.network('${allProducts[index].get('image')}', height: 140.0),
-                          const SizedBox(height: 10.0),
-                          Text('${allProducts[index].get('name')}', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14.0), overflow: TextOverflow.ellipsis),
-                          const SizedBox(height: 5.0),
+                          // const SizedBox(height: 10.0),
+                          const SizedBox(height: 7.0),
+                          Text('${allProducts[index].get(AppSettingsPreferances().langCode=='ar'?'name_ar':'name_en')}', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14.0), overflow: TextOverflow.ellipsis),
+                          // const SizedBox(height: 7.0),
                           RatingBar.builder(
-                            initialRating: 3.5,
+                            initialRating: allProducts[index].get('ratting') ,
                             minRating: 1,
                             direction: Axis.horizontal,
                             allowHalfRating: true,

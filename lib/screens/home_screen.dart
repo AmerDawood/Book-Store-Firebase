@@ -1,4 +1,5 @@
 
+import 'package:book_store/fb_controller/fb_notifications.dart';
 import 'package:book_store/fb_controller/firestore_controller.dart';
 import 'package:book_store/shared_preferences/user_preferences_controler.dart';
 import 'package:flutter/material.dart';
@@ -17,16 +18,30 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with FbNotifications {
   late double width;
   late double height;
+
+
+  @override
+  void initState(){
+    super.initState();
+    initializeForegroundNotificationForAndroid();
+    manageNotificationAction();
+  }
 
 
 
   @override
   Widget build(BuildContext context) {
+
+
+
+
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
+
+
 
     return Scaffold(
       drawer: MyDrawer(),

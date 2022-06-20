@@ -9,6 +9,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../fb_controller/fb_auth_controller.dart';
 import '../../shared_preferences/user_preferences_controler.dart';
 import '../../utilities/helpers.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 class ProfileScreen extends StatefulWidget {
 
@@ -71,7 +72,7 @@ class _ProfileScreenState extends State<ProfileScreen> with Helpers {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         centerTitle: true,
-        title: Text('Profile Screen',
+        title: Text(AppLocalizations.of(context)!.profile,
           style: TextStyle(
             fontFamily: 'Cairo',
             color: Colors.black45,

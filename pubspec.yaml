@@ -49,6 +49,9 @@ dependencies:
   slide_drawer: ^1.0.3
   loading_animation_widget: ^1.2.0+2
   intl: ^0.17.0
+  firebase_messaging: ^11.4.2
+  flutter_local_notifications: any
+
 
 
 dev_dependencies:

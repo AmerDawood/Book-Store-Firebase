@@ -6,10 +6,10 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
-
 import '../fb_controller/firestore_controller.dart';
 import '../model/products_model.dart';
 import '../provider/product_provider.dart';
+import '../shared_preferences/app_preferences_controller.dart';
 
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({Key? key}) : super(key: key);
@@ -90,11 +90,11 @@ class _ProductsScreenState extends State<ProductsScreen> {
                               id: allProducts[index].id,
                               image: allProducts[index].get('image'),
                               price : allProducts[index].get('price'),
-                              name: allProducts[index].get('name'),
-                              description: allProducts[index].get('description'),
+                              name: allProducts[index].get(AppSettingsPreferances().langCode=='ar'?'name_ar':'name_en'),
+                              description:allProducts[index].get(AppSettingsPreferances().langCode=='ar'?'description_ar':'description_en'),
                           ),
                         );
-                        // Navigator.pushNamed(context, '/product_details_screen');
+                        Navigator.pushNamed(context, '/details_screen');
                       },
                       child:Padding(
                         padding: const EdgeInsets.all(5.0),
@@ -125,8 +125,8 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                       width: 250,
                                       // color: Colors.black,
                                       child:  Text(
-                                        allProducts[index].get('description'),
-                                        maxLines: 5,
+                                        allProducts[index].get(AppSettingsPreferances().langCode=='ar'?'description_ar':'description_en'),
+                                        maxLines: 3,
                                         overflow: TextOverflow.ellipsis,
 
                                         style: const TextStyle(
@@ -139,24 +139,27 @@ class _ProductsScreenState extends State<ProductsScreen> {
 
                                   Row(
                                     children: <Widget>[
-                                      Align(
-                                        alignment: Alignment.topRight,
-                                        child:Padding(
-                                          padding: const EdgeInsets.only(left: 10,bottom: 3),
-                                          child: RatingBar.builder(
-                                            initialRating: 3.5,
-                                            minRating: 1,
-                                            direction: Axis.horizontal,
-                                            allowHalfRating: true,
-                                            itemCount: 5,
-                                            itemSize: 16,
-                                            ignoreGestures: true,
-                                            itemPadding: EdgeInsets.symmetric(horizontal: 0.5),
-                                            itemBuilder: (context, _) => Icon(
-                                              Icons.star,
-                                              color: Colors.amber,
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Align(
+                                          alignment: Alignment.topRight,
+                                          child:Padding(
+                                            padding: const EdgeInsets.only(left: 10,bottom: 3),
+                                            child: RatingBar.builder(
+                                              initialRating: allProducts[index].get('ratting'),
+                                              minRating: 1,
+                                              direction: Axis.horizontal,
+                                              allowHalfRating: true,
+                                              itemCount: 5,
+                                              itemSize: 16,
+                                              ignoreGestures: true,
+                                              itemPadding: EdgeInsets.symmetric(horizontal: 0.5),
+                                              itemBuilder: (context, _) => Icon(
+                                                Icons.star,
+                                                color: Colors.amber,
+                                              ),
+                                              onRatingUpdate: (rating) {},
                                             ),
-                                            onRatingUpdate: (rating) {},
                                           ),
                                         ),
                                       ),

@@ -33,13 +33,7 @@ class PageViewWidget extends StatelessWidget {
         SizedBox(
           height: 20,
         ),
-        Text(
-          'Computer Science -IUG',
-          style: TextStyle(
-            fontSize: 20,
-            color:  Colors.grey,
-          ),
-        ),
+
       ],
     );
   }
